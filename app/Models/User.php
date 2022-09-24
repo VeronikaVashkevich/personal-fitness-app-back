@@ -37,7 +37,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'api_token',
-        'is_admin'
     ];
 
     public function generateToken()

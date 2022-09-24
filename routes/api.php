@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExerciseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth')->group(function () {
+
+Route::middleware('auth:api')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
+
+    Route::get('/exercises', [ExerciseController::class, 'index']);
+    Route::get('/exercises/{exercise}', [ExerciseController::class, 'show']);
+    Route::post('/exercises', [ExerciseController::class, 'store']);
+    Route::patch('/exercises/{exercise}/edit', [ExerciseController::class, 'update']);
+    Route::delete('/exercises/{exercise}', [ExerciseController::class, 'destroy']);
 });
